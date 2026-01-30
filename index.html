@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fertility Friday | AI Content Strategist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --brand-pink: #db2777;
+            --brand-light: #fdf2f8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            background: linear-gradient(135deg, #fdf2f8 0%, #f8fafc 100%);
+        }
+
+        h1,
+        h2,
+        h3,
+        .serif {
+            font-family: 'Fraunces', serif;
+        }
+
+        .page {
+            display: none;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .page.active {
+            display: block;
+            animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-hidden {
+            display: none;
+        }
+
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+
+        .transition-transform {
+            transition: transform 0.3s ease;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        /* Custom scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #f9a8d4;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="text-slate-900">
+
+    <!-- 1. LANDING OVERLAY -->
+    <div id="landing-view"
+        class="fixed inset-0 z-[60] bg-white flex flex-col items-center justify-center p-6 text-center">
+        <div class="absolute inset-0 opacity-10 pointer-events-none"
+            style="background-image: radial-gradient(#db2777 0.5px, transparent 0.5px); background-size: 24px 24px;">
+        </div>
+        <div class="max-w-xl relative">
+            <div
+                class="inline-flex items-center bg-pink-50 text-pink-600 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-8 border border-pink-100">
+                <span class="relative flex h-2 w-2 mr-2">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-pink-600"></span>
+                </span>
+                Intelligence Engine v2.0
+            </div>
+            <h1 class="text-6xl md:text-7xl font-black text-slate-900 mb-6 tracking-tight leading-none">
+                Fertility <span class="italic text-pink-600">Friday.</span>
+            </h1>
+            <p class="text-slate-500 text-xl mb-10 leading-relaxed max-w-lg mx-auto font-light">
+                Bridging the gap between your podcast library and <span
+                    class="font-semibold text-slate-800 underline decoration-pink-200 underline-offset-4">2026 market
+                    demands</span>.
+            </p>
+            <button onclick="runInitialAnalysis()"
+                class="group relative bg-slate-900 text-white font-bold py-5 px-12 rounded-full hover:bg-pink-600 transition-all duration-300 shadow-2xl shadow-slate-200 flex items-center mx-auto overflow-hidden">
+                <span class="relative z-10 flex items-center">
+                    Initiate Deep Scan
+                    <svg class="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 2. DASHBOARD PAGE -->
+    <main id="page-dashboard" class="page custom-scrollbar">
+        <div class="max-w-6xl mx-auto">
+            <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+                <div>
+                    <span class="text-pink-600 font-bold text-xs uppercase tracking-[0.3em] mb-2 block">Executive
+                        Suite</span>
+                    <h1 class="text-4xl font-bold text-slate-900 tracking-tight">Market <span
+                            class="italic font-normal">Intelligence</span></h1>
+                </div>
+                <button onclick="fetchDashboard()"
+                    class="bg-white border border-slate-200 text-slate-600 px-6 py-3 rounded-xl hover:border-pink-300 hover:text-pink-600 transition-all font-semibold shadow-sm flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                        </path>
+                    </svg>
+                    Refresh Scan
+                </button>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Summary Card -->
+                <div class="lg:col-span-4 flex flex-col gap-6">
+                    <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 flex-1">
+                        <div class="w-10 h-10 bg-pink-50 rounded-xl flex items-center justify-center mb-6">
+                            <svg class="w-5 h-5 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-4">Library Synopsis
+                        </h3>
+                        <div id="db-summary" class="text-slate-600 leading-relaxed text-lg font-medium">
+                            Analyzing library metadata...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gaps Card -->
+                <div
+                    class="lg:col-span-8 bg-white/60 backdrop-blur-sm p-8 rounded-[2.5rem] shadow-sm border border-white">
+                    <div class="flex items-center justify-between mb-8">
+                        <h3 class="text-sm font-bold uppercase tracking-widest text-slate-400">2026 Opportunity Gaps
+                        </h3>
+                        <span
+                            class="bg-pink-100 text-pink-600 text-[10px] font-bold px-3 py-1 rounded-full uppercase">Priority
+                            Ranking</span>
+                    </div>
+                    <div id="trends-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+
+                    <button id="goToGenerate"
+                        class="w-full mt-10 bg-pink-600 text-white font-bold py-5 rounded-2xl hover:bg-slate-900 transition-all duration-300 shadow-xl shadow-pink-100 uppercase tracking-widest text-sm flex justify-center items-center group">
+                        Explore Strategy Clusters
+                        <svg class="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 3. STRATEGY RESULTS PAGE -->
+    <main id="page-results" class="page custom-scrollbar">
+        <div class="max-w-4xl mx-auto">
+            <button onclick="showPage('page-dashboard')"
+                class="mb-10 inline-flex items-center text-slate-400 hover:text-pink-600 transition font-bold uppercase text-[10px] tracking-widest group">
+                <svg class="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                Return to Insights
+            </button>
+
+            <div class="mb-12">
+                <h2 class="text-5xl font-bold text-slate-900 tracking-tight mb-4">Content <span
+                        class="text-pink-600 italic font-normal">Blueprints</span></h2>
+                <p class="text-slate-500 font-medium text-lg">Select a strategic pillar to reveal high-conversion
+                    content ideas.</p>
+            </div>
+
+            <div id="results-accordion" class="space-y-4 pb-20">
+                <!-- Topics injected here -->
+            </div>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <main id="page-content" class="page custom-scrollbar">
+        <div class="max-w-4xl mx-auto">
+            <button onclick="showPage('page-results')"
+                class="mb-10 inline-flex items-center text-slate-400 hover:text-pink-600 transition font-bold uppercase text-[10px] tracking-widest group">
+                <svg class="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                Back to Strategy
+            </button>
+
+            <div id="ready-for-production"
+                class="bg-white rounded-[3rem] shadow-2xl shadow-pink-100/50 border border-slate-100 overflow-hidden">
+
+                <div class="p-12 bg-slate-900 text-white relative">
+                    <div class="absolute top-0 right-0 p-8 opacity-10">
+                        <svg class="w-24 h-24 text-pink-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.154c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                        </svg>
+                    </div>
+                    <span class="text-pink-400 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Ready for
+                        Production</span>
+                    <h2 id="draft-title" class="text-4xl md:text-5xl font-bold leading-tight max-w-2xl"></h2>
+                </div>
+
+                <div class="p-12 space-y-16">
+                    <section>
+                        <h4
+                            class="text-[10px] font-bold uppercase text-pink-500 tracking-[0.2em] mb-6 flex items-center">
+                            <span class="w-8 h-px bg-pink-200 mr-3"></span> The Hook
+                        </h4>
+                        <p id="draft-hook"
+                            class="text-3xl font-medium text-slate-800 italic leading-snug serif px-4 border-l-4 border-pink-100">
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4 class="text-[10px] font-bold uppercase text-slate-400 tracking-[0.2em] mb-6">Strategic
+                            Takeaways</h4>
+                        <ul id="draft-takeaways" class="grid grid-cols-1 md:grid-cols-2 gap-4"></ul>
+                    </section>
+
+                    <section>
+                        <h4 class="text-[10px] font-bold uppercase text-slate-400 tracking-[0.2em] mb-6">Narrative
+                            Architecture</h4>
+                        <div id="draft-outline" class="text-slate-600 leading-relaxed space-y-6 text-lg"></div>
+                    </section>
+
+                    <section
+                        class="bg-slate-50 p-10 rounded-[2rem] border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div class="max-w-md">
+                            <h4 class="text-[10px] font-bold uppercase text-pink-600 tracking-[0.2em] mb-2">Final Call
+                                to Action</h4>
+                            <p id="draft-cta" class="text-slate-900 font-bold text-xl"></p>
+                        </div>
+
+                        <button onclick="downloadPDF()"
+                            class="whitespace-nowrap bg-white border border-slate-200 text-slate-900 px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-all shadow-sm">
+                            Save as PDF
+                        </button>
+                    </section>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center pb-20">
+                <p class="text-slate-400 text-xs font-medium italic">Hand-crafted by Fertility Friday AI Content
+                    Strategist</p>
+            </div>
+        </div>
+    </main>
+    <!-- GLOBAL LOADER -->
+    <div id="loader"
+        class="hidden fixed inset-0 bg-white/90 backdrop-blur-xl z-[100] flex flex-col items-center justify-center">
+        <div class="relative w-20 h-20 mb-8">
+            <div class="absolute inset-0 border-4 border-pink-100 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-pink-600 rounded-full border-t-transparent animate-spin">
+            </div>
+        </div>
+        <p id="loader-text" class="font-bold uppercase tracking-[0.5em] text-[10px] text-pink-600 animate-pulse">
+            Processing Analysis</p>
+    </div>
+
+    <script>
+        const WEBHOOK_URL = '/api';
+        let cachedStrategyData = null;
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            // Scroll to top of the page when switching
+            document.getElementById(pageId).scrollTop = 0;
+        }
+
+        function toggleElement(id) {
+            const el = document.getElementById(id);
+            const icon = document.getElementById(`icon-${id}`);
+            if (el) el.classList.toggle('content-hidden');
+            if (icon) icon.classList.toggle('rotate-180');
+        }
+
+        async function runInitialAnalysis() {
+            document.getElementById('landing-view').classList.add('hidden');
+            await fetchDashboard();
+            showPage('page-dashboard');
+        }
+
+        async function fetchDashboard() {
+            toggleLoader(true, "Synchronizing Library");
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: "dashboard" })
+                });
+
+                const rawData = await response.json();
+                console.log("Dashboard Raw Response:", rawData); // Debugging
+
+                // Robust extraction: Handle array responses or nested 'output' key
+                let data = rawData;
+                if (Array.isArray(rawData)) {
+                    data = rawData[0].output || rawData[0];
+                } else if (rawData.output) {
+                    data = rawData.output;
+                }
+
+                if (!data || !data.summary) {
+                    console.error("Data Validation Failed. Missing 'summary' key.", data);
+                    throw new Error("Invalid Response: Missing 'summary'");
+                }
+
+                cachedStrategyData = data;
+                document.getElementById('db-summary').innerText = data.summary;
+
+                const trendsList = document.getElementById('trends-list');
+                trendsList.innerHTML = '';
+
+                (data.gaps || []).forEach(item => {
+                    const hasValidMatch = item.match && item.match.EP_NUMBER && item.match.EP_NUMBER !== "N/A";
+                    const isActuallyExisting = item.status.toLowerCase() === 'existing' && hasValidMatch;
+
+                    const subtext = isActuallyExisting
+                        ? `Episode ${item.match.EP_NUMBER}`
+                        : 'New Opportunity';
+
+                    const cardClass = isActuallyExisting
+                        ? 'border-slate-100 bg-slate-50/50 opacity-80'
+                        : 'border-pink-100 bg-white shadow-sm';
+
+                    const badgeClass = isActuallyExisting
+                        ? 'bg-slate-200 text-slate-500'
+                        : 'bg-pink-600 text-white';
+
+                    trendsList.innerHTML += `
+                        <div class="flex flex-col p-6 rounded-2xl border ${cardClass} transition-all hover:scale-[1.02]">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="${badgeClass} font-bold text-[9px] uppercase px-2 py-1 rounded">
+                                    ${isActuallyExisting ? 'In Library' : 'Gap Identified'}
+                                </span>
+                                <span class="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">${subtext}</span>
+                            </div>
+                            <p class="font-bold text-slate-800 text-sm leading-tight">${item.trend || 'Unknown Topic'}</p>
+                        </div>
+                    `;
+                });
+            } catch (e) {
+                console.error("Dashboard Fetch Error:", e);
+                alert(`Error: ${e.message}. See console for details.`);
+            } finally {
+                toggleLoader(false);
+            }
+        }
+
+        document.getElementById('goToGenerate').addEventListener('click', () => {
+            if (cachedStrategyData) {
+                renderIdeas(cachedStrategyData.topics);
+                showPage('page-results');
+            }
+        });
+
+        function renderIdeas(topics) {
+            const container = document.getElementById('results-accordion');
+            container.innerHTML = '';
+
+            topics.forEach((t, tIdx) => {
+                const topicId = `topic-${tIdx}`;
+                const topicCard = document.createElement('div');
+                topicCard.className = "bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden";
+
+                topicCard.innerHTML = `
+                    <button onclick="toggleElement('${topicId}')" class="w-full flex justify-between items-center p-8 hover:bg-slate-50 transition-all text-left">
+                        <div class="flex items-center gap-6">
+                            <div class="w-12 h-12 bg-pink-100 rounded-2xl flex items-center justify-center text-pink-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                            </div>
+                            <div>
+                                <span class="text-pink-500 font-bold text-[10px] uppercase tracking-[0.2em] mb-1 block">Strategy Pillar</span>
+                                <h3 class="font-bold text-2xl text-slate-900">${t.topic}</h3>
+                            </div>
+                        </div>
+                        <svg id="icon-${topicId}" class="w-5 h-5 text-slate-300 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <div id="${topicId}" class="content-hidden bg-slate-50/30 border-t border-slate-50">
+                        ${t.ideas.map((idea, iIdx) => {
+                    const ideaId = `idea-${tIdx}-${iIdx}`;
+                    return `
+                            <div class="border-b border-slate-50 last:border-0">
+                                <button onclick="toggleElement('${ideaId}')" class="w-full px-10 py-6 hover:bg-white transition-all text-left flex justify-between items-center group">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full border-2 border-pink-100 flex items-center justify-center text-[10px] font-black text-pink-400 mr-5 group-hover:bg-pink-600 group-hover:text-white group-hover:border-pink-600 transition-all">
+                                            ${iIdx + 1}
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-slate-800 text-lg">${idea.title}</h4>
+                                            <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">${idea.angle}</p>
+                                        </div>
+                                    </div>
+                                    <div class="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-bold text-pink-600 uppercase tracking-widest">
+                                        View Details
+                                    </div>
+                                </button>
+                                <div id="${ideaId}" class="content-hidden px-10 pb-10">
+                                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm ml-12">
+                                        <p class="text-slate-600 leading-relaxed mb-6 text-lg font-light italic">"${idea.details}"</p>
+                                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                                            <div>
+                                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Target Value</span>
+                                                <p class="text-sm font-semibold text-slate-700">${idea.value}</p>
+                                            </div>
+                                            <button onclick="generateContent('${idea.title}')" class="bg-slate-900 text-white px-8 py-4 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-pink-600 transition-all flex items-center">
+                                                Generate Full Draft
+                                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+                }).join('')}
+                    </div>
+                `;
+                container.appendChild(topicCard);
+            });
+        }
+
+        async function generateContent(title) {
+            toggleLoader(true, "Constructing Draft");
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: "generate_content", title: title })
+                });
+
+                const rawData = await response.json();
+                console.log("Generate Content Raw Response:", rawData); // Debugging
+
+                let data = rawData;
+                if (Array.isArray(rawData)) {
+                    data = rawData[0].output || rawData[0];
+                } else if (rawData.output) {
+                    data = rawData.output;
+                }
+
+                if (!data || !data.title) {
+                    console.error("Data Validation Failed. Missing 'title' key.", data);
+                    throw new Error("Invalid Response: Missing 'title'");
+                }
+
+                document.getElementById('draft-title').innerText = data.title;
+                document.getElementById('draft-hook').innerText = `"${data.hook || ''}"`;
+
+                const takeawaysList = document.getElementById('draft-takeaways');
+                takeawaysList.innerHTML = '';
+                (data.takeaways || []).forEach(item => {
+                    let takeawayText = "";
+                    if (typeof item === 'string') {
+                        takeawayText = item;
+                    } else if (typeof item === 'object' && item !== null) {
+                        const title = item.title || item.header || "";
+                        const desc = item.description || item.text || item.insight || item.takeaway || "";
+                        if (title && desc) {
+                            takeawayText = `<strong>${title}</strong>: ${desc}`;
+                        } else {
+                            takeawayText = title || desc || JSON.stringify(item);
+                        }
+                    } else {
+                        takeawayText = String(item);
+                    }
+
+                    takeawaysList.innerHTML += `<li class="bg-pink-50/50 p-5 rounded-2xl border border-pink-100 text-sm font-semibold text-slate-700 flex items-start">
+                        <svg class="w-5 h-5 text-pink-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        ${takeawayText}
+                    </li>`;
+                });
+
+                // DEFENSIVE: Ensure outline is a string before splitting
+                const outlineRaw = data.outline || '';
+                const outlineText = typeof outlineRaw === 'string' ? outlineRaw : (Array.isArray(outlineRaw) ? outlineRaw.join('\n\n') : String(outlineRaw));
+                document.getElementById('draft-outline').innerHTML = outlineText.split('\n').filter(p => p.trim() !== '').map(p => `<p class="border-b border-slate-50 pb-4 last:border-0">${p}</p>`).join('');
+                document.getElementById('draft-cta').innerText = data.call_to_action || 'Subscribe for more insights.';
+
+                showPage('page-content');
+            } catch (e) {
+                console.error("Content Generation Error:", e);
+                alert(`Error: ${e.message}. See console for details.`);
+            } finally {
+                toggleLoader(false);
+            }
+        }
+        function downloadPDF() {
+            console.log("PDF conversion started...");
+
+            // Target the outer container to include the Title and Header
+            const element = document.getElementById('ready-for-production');
+
+            if (!element) {
+                alert("Error: Could not find the content container!");
+                return;
+            }
+
+            const opt = {
+                margin: [0.5, 0.5],
+                filename: 'Episode_Draft.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, letterRendering: true, ignoreElements: (el) => el.getAttribute('data-html2canvas-ignore') === 'true' },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            // This runs the conversion and triggers the download
+            html2pdf().set(opt).from(element).save();
+        }
+
+        function toggleLoader(show, text) {
+            const loader = document.getElementById('loader');
+            if (text) document.getElementById('loader-text').innerText = text;
+            loader.classList.toggle('hidden', !show);
+        }
+    </script>
+</body>
+
+</html>
